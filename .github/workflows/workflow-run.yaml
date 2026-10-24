@@ -3,6 +3,8 @@ on:
   workflow_run:
     workflows: [Repository Events]
     types: [completed]
+    branches:
+      - main  # only trigger on the main branch (filtering by branch is optional)
 jobs:
   echo-string:
     runs-on: ubuntu-latest
