@@ -1,4 +1,4 @@
-name: Caching and Artifacts
+name: Artifacts
 on: [workflow_dispatch]
 jobs:
   use-axios:
