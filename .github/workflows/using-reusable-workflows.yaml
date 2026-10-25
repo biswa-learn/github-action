@@ -1,0 +1,16 @@
+name: Calling Reusable Workflows
+on:
+  workflow_dispatch:
+    inputs:
+      name:
+        description: "Input description"
+        type: string
+        default: "Biswaranjan"
+        required: false
+jobs:
+  calling-a-reusable-wf:
+    uses: biswa-learn/github-action-workflows/.github/workflows/reusable.yaml@master
+    with:
+      name: ${{ inputs.name }}
+    secrets:
+      access-token: ${{ secrets.ACCESS_TOKEN }}
