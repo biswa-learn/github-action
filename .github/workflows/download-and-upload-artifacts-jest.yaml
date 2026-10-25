@@ -21,14 +21,14 @@ jobs:
       - name: Run Tests
         run: npm test
       - name: Upload Code Coverage Report
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v7.0.2
         if: always()
         with:
           name: code-coverage
           path: coverage
           retention-days: 10
       - name: Download Code Coverage
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v8.0.2
         with:
           name: code-coverage
           path: code-coverage-report
