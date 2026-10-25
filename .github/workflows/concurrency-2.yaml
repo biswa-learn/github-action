@@ -1,0 +1,18 @@
+name: Concurrency 2
+run-name: Concurrency 2 (${{ inputs.environment }})
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: "Environment"
+        type: environment
+        required: true
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.inputs.environment }}    # it should be same as concurrency group name in concurrency-1.yaml file, so that if a workflow run is already running for a particular environment, then the next workflow run for the same environment will be cancelled.
+  cancel-in-progress: true
+jobs:
+  sleep:
+    runs-on: ubuntu-latest
+    steps:
+      - run: sleep 30
