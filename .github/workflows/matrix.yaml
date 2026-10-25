@@ -1,18 +1,70 @@
+# name: Matrix
+# on: [push]
+
+# jobs:
+#   node-matrix:
+#     continue-on-error: false # Setting continue-on-error to false will cause the job to fail if any step fails. Default: false
+#     strategy:
+#       matrix:
+#         os: [ubuntu-latest, windows-latest]
+#         node-version: [14, 15, 16]
+#       fail-fast: false # Setting fail-fast to false prevents GitHub from canceling all in-progress jobs if any matrix job fails. Default: true
+#       # max-parallel: 3 # Setting max-parallel to 3 will limit the number of matrix jobs that can run in parallel to 3. Default: no limit
+#     runs-on: ${{ matrix.os }}
+#     steps:
+#       - run: node -v
+#       - uses: actions/setup-node@v3
+#         with:
+#           node-version: ${{ matrix.node-version }}
+#       - run: node -v
+
+
+
+
+# Matrix with include and exclude
+
 name: Matrix
 on: [push]
 
+#------- ORIGINAL --------#
+# X {os: ubuntu-latest, node-version: 14, is-ubuntu: true, experimental: false}
+# {os: ubuntu-latest, node-version: 15, is-ubuntu: true, experimental: false}
+# {os: ubuntu-latest, node-version: 16, is-ubuntu: true, experimental: true}
+# {os: windows-latest, node-version: 14, experimental: false}
+# {os: windows-latest, node-version: 15, experimental: false}
+# {os: windows-latest, node-version: 16, experimental: false}
+# {os: macos-latest, node-version: 15}
+# {os: ubuntu-latest, node-version: 17 }
+
 jobs:
   node-matrix:
-    continue-on-error: false # Setting continue-on-error to false will cause the job to fail if any step fails. Default: false
+    continue-on-error: ${{ matrix.experimental == true }}  # Experimental jobs will not fail the workflow run, but will be marked as failed in the workflow run summary. Default: false
     strategy:
       matrix:
         os: [ubuntu-latest, windows-latest]
         node-version: [14, 15, 16]
-      fail-fast: false # Setting fail-fast to false prevents GitHub from canceling all in-progress jobs if any matrix job fails. Default: true
-      # max-parallel: 3 # Setting max-parallel to 3 will limit the number of matrix jobs that can run in parallel to 3. Default: no limit
+        include:
+          - os: ubuntu-latest
+            is-ubuntu: true
+          - os: macos-latest
+            node-version: 15
+          - experimental: false
+          - os: ubuntu-latest
+            node-version: 16
+            experimental: true
+          - os: ubuntu-latest
+            node-version: 17
+        exclude:
+          - os: ubuntu-latest
+            node-version: 14
+      fail-fast: true
+      # max-parallel: 3
     runs-on: ${{ matrix.os }}
     steps:
+      - if: matrix.experimental == true
+        run: exit 1
       - run: node -v
+      - run: echo '${{ toJson(matrix) }}'
       - uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
