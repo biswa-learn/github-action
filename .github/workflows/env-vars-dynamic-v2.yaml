@@ -1,4 +1,4 @@
-name: Environment Variables
+name: Environment Variables Dynamic v2
 on: [push]
 
 env:
