@@ -1,0 +1,19 @@
+name: Matrix
+on: [push]
+
+jobs:
+  node-matrix:
+    continue-on-error: false # Setting continue-on-error to false will cause the job to fail if any step fails. Default: false
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        node-version: [14, 15, 16]
+      fail-fast: false # Setting fail-fast to false prevents GitHub from canceling all in-progress jobs if any matrix job fails. Default: true
+      # max-parallel: 3 # Setting max-parallel to 3 will limit the number of matrix jobs that can run in parallel to 3. Default: no limit
+    runs-on: ${{ matrix.os }}
+    steps:
+      - run: node -v
+      - uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: node -v
