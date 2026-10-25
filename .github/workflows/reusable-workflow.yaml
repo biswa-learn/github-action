@@ -7,6 +7,12 @@ on:
         value: ${{ jobs.generate-output.outputs.date }}
 
 jobs:
+  nested-workflow-call:
+    uses: biswa-learn/github-action-workflows/.github/workflows/reusable.yaml@master
+    with:
+      name: "Biswaranjan"
+    secrets:
+      access-token: ${{ secrets.ACCESS_TOKEN }}
   generate-output:
     runs-on: ubuntu-latest
     outputs:
