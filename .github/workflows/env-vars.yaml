@@ -11,7 +11,7 @@ jobs:
       - name: Log GITHUB_REF
         run: echo $GITHUB_REF
       - name: Log GITHUB_REF using github context
-        run: echo '${{ github.ref }}'
+        run: echo '${{ github.ref }}' # github.ref is telling which branch or tag triggered the workflow run.
   env-vars-and-context:
     runs-on: ubuntu-latest
     # if: $GITHUB_REF == 'refs/heads/main' DONT DO THIS (This only accessable in side runner machine, not in the workflow file). Use github context instead for conditional job execution, because github context is substituted at the time of workflow execution by github action, while env variables are substituted at the time of workflow parsing.
