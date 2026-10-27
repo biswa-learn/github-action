@@ -5,7 +5,7 @@ inputs:
   who_to_greet:
     description: "Who to greet"
     # required: true
-    default: "World-Action"
+    default: "World-Action" # Behind the scenes, GitHub Actions automatically creates an INPUT_ environment variable for each action input. You don't need to declare it manually in runs.env.
 outputs:
   time:
     description: The time of the greeting
@@ -15,7 +15,7 @@ runs:
   image: "Dockerfile"
   # entrypoint:
   args:
-    - ${{ inputs.who_to_greet }}
+    - ${{ inputs.who_to_greet }}  # This will access by $1 as agrument in entrypoint.sh. You can also access it as an environment variable $INPUT_WHO_TO_GREET in entrypoint.sh. (docker set inputs.who_to_greet as env variable)
   env:
     HELLO: WORLD
   post-entrypoint: "/cleanup.sh"
