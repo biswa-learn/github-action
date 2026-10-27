@@ -25,7 +25,7 @@ jobs:
         id: greet
         uses: ./.github/actions/hello
         with:
-          who_to_greet: Biswaranjan
+          who_to_greet: Biswaranjan Behera
       - name: Log Greeting Time
         run: echo "${{ steps.greet.outputs.time }}"
       - name: Log ENV Var
