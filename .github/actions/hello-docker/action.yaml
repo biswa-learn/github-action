@@ -20,3 +20,6 @@ runs:
     HELLO: WORLD
   post-entrypoint: "/cleanup.sh"
   post-if: runner.os == 'linux'
+
+
+  

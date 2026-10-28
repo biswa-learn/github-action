@@ -38,7 +38,8 @@ jobs:
     steps:
       - uses: actions/checkout@v6
       - name: Send a joke on Slack
-        uses: ./.github/actions/slack-joke
+        # uses: ./.github/actions/slack-joke
+        uses: ./.github/actions/slack-php
         id: slack-joke
         with:
           slack_username: Biswaranjan-Behera
