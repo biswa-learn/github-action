@@ -25,19 +25,19 @@ $response =  WpOrg\Requests\Requests::post(
                 "fields" => array (
                     array (
                         "type" => "mrkdwn",
-                        "text" => "*Repository:*\n{$_ENV['GITHUB_REPOSITORY']}",
+                        "text" => "*Repository:*\n" . $_ENV['GITHUB_REPOSITORY'],
                     ),
                     array (
                         "type" => "mrkdwn",
-                        "text" => "*Event:*\n{$_ENV['GITHUB_EVENT_NAME']}",
+                        "text" => "*Event:*\n" . $_ENV['GITHUB_EVENT_NAME'],
                     ),
                     array (
                         "type" => "mrkdwn",
-                        "text" => "*Ref:*\n{$_ENV['GITHUB_REF']}",
+                        "text" => "*Ref:*\n" . $_ENV['GITHUB_REF'],
                     ),
                     array (
                         "type" => "mrkdwn",
-                        "text" => "*SHA:*\n{$_ENV['GITHUB_SHA']}",
+                        "text" => "*SHA:*\n" . $_ENV['GITHUB_SHA'],
                     ),
                 ),
             ),
