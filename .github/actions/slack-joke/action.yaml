@@ -30,7 +30,7 @@ runs:
       if: inputs.upload_joke
     - name: Upload the Joke
       if: inputs.upload_joke
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v7
       with:
         name: joke
         path: joke.txt
