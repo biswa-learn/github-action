@@ -42,6 +42,8 @@ jobs:
         uses: ./.github/actions/slack-php
         id: slack-joke
         with:
+          # slack_username: Biswaranjan-Behera
+          # upload_joke: true
           slack_webhook: ${{ secrets.SLACK_WEBHOOK }}
           message: "GitHub Action completed for ${{ github.repository }}"
       - name: Displaying joke output
