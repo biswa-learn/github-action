@@ -32,3 +32,17 @@ jobs:
         run: echo "${{ steps.greet.outputs.time }}"
       - name: Log ENV Var
         run: echo $HELLO_TIME
+
+  simple-action-2:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Send a joke on Slack
+        uses: ./.github/actions/slack-joke
+        id: slack-joke
+        with:
+          slack_username: Biswaranjan-Behera
+          upload_joke: true
+          slack_webhook: ${{ secrets.SLACK_WEBHOOK }}
+      - name: Displaying joke output
+        run: echo '${{ steps.slack-joke.outputs.joke }}'
